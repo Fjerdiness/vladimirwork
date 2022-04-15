@@ -14,7 +14,7 @@ public class validSubmitMale extends variables {
 
         SafariDriver driver = new SafariDriver();
 
-        System.out.println("\n Start of " + validSubmitFemale.class + "\n");
+        System.out.println("\n Start of " + validSubmitMale.class + "\n");
 
         driver.get("https://vladimirwork.github.io/web-ui-playground/");
         driver.manage().window().maximize();
