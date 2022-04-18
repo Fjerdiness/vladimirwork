@@ -6,19 +6,27 @@ import org.openqa.selenium.safari.SafariDriver;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class errNotValidEmail {
+public class errNotValidDomain {
     public static void main(String[] args) {
         SafariDriver driver = new SafariDriver();
 
-        System.out.println("\n Start of " + errNotValidEmail.class + "\n");
+        System.out.println("\n Start of " + errNotValidDomain.class + "\n");
 
-        driver.get("https://vladimirwork.github.io/web-ui-playground/");
+        driver.get(variables.URL);
 
-        driver.findElement(By.id("99")).click();
-        driver.findElement(By.id("3")).sendKeys(variables.validMinEmail);
+        driver.findElement(By.id(variables.submitBtn)).click();
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
 
-         do {
-            driver.findElement(By.id("3")).sendKeys(Keys.BACK_SPACE);
-        }while ((!driver.getPageSource().contains(errMessages.errEmail)));
+        while ((!driver.getPageSource().contains(errMessages.errEmail))) {
+            driver.findElement(By.id(variables.emailInput)).sendKeys(Keys.BACK_SPACE);
+        }
+
+
+        if (driver.getPageSource().contains(errMessages.errEmail)) {
+            System.out.println(driver.findElement(By.id(variables.emailInput)).getText() + " isn't valid email");
+        } else System.out.println("Something happened here");
+        //TODO Why not showing text from email field?
+
+        driver.quit();
     }
 }

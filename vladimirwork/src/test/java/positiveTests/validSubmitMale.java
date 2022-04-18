@@ -16,16 +16,15 @@ public class validSubmitMale extends variables {
 
         System.out.println("\n Start of " + validSubmitMale.class + "\n");
 
-        driver.get("https://vladimirwork.github.io/web-ui-playground/");
-        driver.manage().window().maximize();
+        driver.get(variables.URL);
 
-        driver.findElement(By.id("1")).sendKeys(variables.validMinFirstName);
-        driver.findElement(By.id("2")).sendKeys(variables.validMinLastName);
-        driver.findElement(By.id("3")).sendKeys(variables.validMinEmail);
-        driver.findElement(By.id("4")).sendKeys(variables.validMinPhoneNumber);
-        driver.findElement(By.cssSelector("input[value = 'Male']")).click();
-        driver.findElement(By.id("5")).click();
-        driver.findElement(By.id("99")).click();
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
+        driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
+        driver.findElement(By.id(variables.phoneNumberInput)).sendKeys(variables.validMinPhoneNumber);
+        driver.findElement(By.xpath("//*[@id=\"root\"]/form/div[1]/input")).click();
+        driver.findElement(By.id(variables.agreementCheckbox)).click();
+        driver.findElement(By.id(variables.submitBtn)).click();
         String log = driver.switchTo().alert().getText();
         List<String> listAlert = List.of(log.split(",", 0));
 
@@ -34,14 +33,14 @@ public class validSubmitMale extends variables {
         listVariables.add(variables.validMinLastName);
         listVariables.add(variables.validMinEmail);
         listVariables.add(variables.validMinPhoneNumber);
-        listVariables.add(listAlert.get(4));
-        listVariables.add(listAlert.get(5));
+        listVariables.add(variables.male);
+        listVariables.add("true");
 
         for (int i = 0; i < listAlert.size(); i++) {
             if (listAlert.get(i).contains(listVariables.get(i))) {
-                System.out.println(listVariables.get(i) + " is presented in response!");
+                System.out.println(listVariables.get(i) + " IS presented in response!");
             } else {
-                System.out.println(listVariables.get(i) + " isn't presented in response!");
+                System.out.println(listVariables.get(i) + " ISNT presented in response!");
             }
         }
 

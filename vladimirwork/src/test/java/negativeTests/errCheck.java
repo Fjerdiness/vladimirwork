@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
 import positiveTests.validSubmitFemale;
 import preConditions.errMessages;
+import preConditions.variables;
 
 public class errCheck {
     public static void main(String[] args) {
@@ -11,8 +12,8 @@ public class errCheck {
 
         System.out.println("\n Start of " + validSubmitFemale.class + "\n");
 
-        driver.get("https://vladimirwork.github.io/web-ui-playground/");
-        driver.findElement(By.id("99")).click();
+        driver.get(variables.URL);
+        driver.findElement(By.id(variables.submitBtn)).click();
 
         if (driver.getPageSource().contains(errMessages.errFirstName)) {
             System.out.println(errMessages.errFirstName + " Is presented!");

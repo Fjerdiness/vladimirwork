@@ -14,12 +14,12 @@ public class errLimitLastNameMsg {
 
         System.out.println("\n Start of " + errLimitLastNameMsg.class + "\n");
 
-        driver.get("https://vladimirwork.github.io/web-ui-playground/");
-        driver.findElement(By.id("99")).click();
-        driver.findElement(By.id("2")).sendKeys(variables.validMinLastName);
+        driver.get(variables.URL);
+        driver.findElement(By.id(variables.submitBtn)).click();
+        driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
 
         while ((!driver.getPageSource().contains(errMessages.errLastName))) {
-            driver.findElement(By.id("2")).sendKeys("B");
+            driver.findElement(By.id(variables.lastNameInput)).sendKeys("B");
             i++;
         }
 
