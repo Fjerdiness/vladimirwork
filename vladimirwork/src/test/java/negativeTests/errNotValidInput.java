@@ -2,7 +2,6 @@ package negativeTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
-import positiveTests.validSubmitFemale;
 import preConditions.errMessages;
 import preConditions.variables;
 

@@ -1,7 +1,5 @@
 package preConditions;
 
-import java.util.List;
-
 public class errMessages {
     public static String errFirstName = "Valid first name is required.";
     public static String errLastName = "Valid last name is required.";

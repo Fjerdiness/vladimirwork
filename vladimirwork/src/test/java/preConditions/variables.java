@@ -1,8 +1,5 @@
 package preConditions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public  class variables {
     public static String firstNameInput = "1";
     public static String lastNameInput = "2";

@@ -2,14 +2,9 @@ package negativeTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import positiveTests.validSubmitFemale;
 import preConditions.errMessages;
 import preConditions.variables;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class errLimitFirstNameMsg {
     public static void main(String[] args) {
@@ -21,7 +16,7 @@ public class errLimitFirstNameMsg {
 
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
-//        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
         driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
         driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
         driver.findElement(By.id(variables.phoneNumberInput)).sendKeys(variables.validMinPhoneNumber);
@@ -33,7 +28,7 @@ public class errLimitFirstNameMsg {
             i++;
         }
 
-//        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
         if (!driver.getPageSource().contains(errMessages.errFirstName)) {
             System.out.println("Limit of FirstName letters is: " + i);
         } else {
