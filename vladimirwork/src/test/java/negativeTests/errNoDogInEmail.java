@@ -20,6 +20,7 @@ public class errNoDogInEmail {
 
         if (driver.getPageSource().contains(errMessages.errEmail)) {
             System.out.println(driver.findElement(By.id(variables.emailInput)).getText() + " isn't valid email");
+            driver.findElement(By.id(variables.submitBtn)).click();
         } else System.out.println("Something happened here");
         //TODO Why not showing text from email field?
 

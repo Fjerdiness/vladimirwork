@@ -20,6 +20,15 @@ public class errLimitLastNameMsg {
         while ((!driver.getPageSource().contains(errMessages.errLastName))) {
             driver.findElement(By.id(variables.lastNameInput)).sendKeys("B");
             i++;
+            if (i > 255 && !driver.getPageSource().contains(errMessages.errLastName)) {
+
+                System.out.println("Limit is more than 256, no validation error. Terminated.");
+                break;
+            }
+        }
+        driver.findElement(By.id(variables.submitBtn)).click();
+        if (driver.getPageSource().contains(errMessages.errLastName)) {
+            System.out.println("Page still contatins validation error");
         }
 
         System.out.println("Limit of LastName letters is: " + i);

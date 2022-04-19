@@ -2,8 +2,10 @@ package negativeTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import preConditions.errMessages;
 import preConditions.variables;
+
 
 public class errLimitPhoneNumberMsg {
     public static void main(String[] args) {
@@ -21,7 +23,10 @@ public class errLimitPhoneNumberMsg {
             driver.findElement(By.id(variables.phoneNumberInput)).sendKeys("1");
             i++;
         }
-
+        driver.findElement(By.id(variables.submitBtn)).click();
+        if (driver.getPageSource().contains(errMessages.errPhoneNumber)) {
+            System.out.println("Page still contatins validation error");
+        }
         System.out.println("Limit of PhoneNumber letters is: " + i);
         driver.quit();
     }

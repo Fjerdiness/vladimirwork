@@ -20,9 +20,10 @@ public class errMaximumEmailField {
         while ((!driver.getPageSource().contains(errMessages.errEmail))) {
             driver.findElement(By.id(variables.emailInput)).sendKeys("B");
             i += 1;
-            if (i > 255) {
+            driver.findElement(By.id(variables.submitBtn)).click();
+            if (i > 255 && !driver.getPageSource().contains(errMessages.errEmail)) {
 
-                System.out.println("Limit is more than 256. Terminated.");
+                System.out.println("Limit is more than 256, no validation error. Terminated.");
                 break;
             }
         }

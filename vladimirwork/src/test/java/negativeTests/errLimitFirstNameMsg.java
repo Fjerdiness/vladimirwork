@@ -26,14 +26,20 @@ public class errLimitFirstNameMsg {
         while ((!driver.getPageSource().contains(errMessages.errFirstName))) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys("B");
             i++;
+            if (i > 255 && !driver.getPageSource().contains(errMessages.errFirstName)) {
+
+                System.out.println("Limit is more than 256, no validation error. Terminated.");
+                break;
+            }
         }
 
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
-        if (!driver.getPageSource().contains(errMessages.errFirstName)) {
-            System.out.println("Limit of FirstName letters is: " + i);
-        } else {
-            System.out.println("Something happened here");
+
+        driver.findElement(By.id(variables.submitBtn)).click();
+        if (driver.getPageSource().contains(errMessages.errFirstName)) {
+            System.out.println("Page still contains validation error");
         }
+
+        System.out.println("Limit of FirstName letters is: " + i);
         driver.quit();
     }
 }
