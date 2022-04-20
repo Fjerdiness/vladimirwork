@@ -1,5 +1,7 @@
 package preConditions;
 
+import org.openqa.selenium.safari.SafariDriver;
+
 public  class variables {
     public static String firstNameInput = "1";
     public static String lastNameInput = "2";
@@ -9,6 +11,8 @@ public  class variables {
     public static String submitBtn = "99";
     public static String male = "Male";
     public static String female = "Female";
+    public static String boolAgreementTrue = "true";
+    public static String boolAgreementFalse = "false";
 
     public static String URL = "https://vladimirwork.github.io/web-ui-playground/";
     public static String validMinFirstName = "Fi";

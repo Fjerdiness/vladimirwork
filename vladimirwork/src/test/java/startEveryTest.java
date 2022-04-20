@@ -8,11 +8,12 @@ public class startEveryTest {
         //In Safari: Develop - allow remote automation.
 
         //At the end of the day, I couldnt start it with @Test/@BeforeTest/etc and some sort of orchestrator.
+        //Im ashamed here.
 
-        validSubmitFemale.main(args);
-        Thread.sleep(250);
-        validSubmitMale.main(args);
-        Thread.sleep(250);
+//        validSubmitFemale.main(args);
+//        Thread.sleep(250);
+//        validSubmitMale.main(args);
+//        Thread.sleep(250);
         errCheck.main(args);
         Thread.sleep(250);
         errLimitLastNameMsg.main(args);
