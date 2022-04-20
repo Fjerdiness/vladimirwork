@@ -2,33 +2,55 @@ package negativeTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
 
 public class errLimitPhoneNumberMsg {
-    public static void main(String[] args) {
-        int i = 6;
+    static SafariDriver driver;
+    static int i = 6;
 
-        SafariDriver driver = new SafariDriver();
-
-        System.out.println("\n Start of " + errLimitLastNameMsg.class + "\n");
-
+    @BeforeTest
+    public static void preConditions() {
+        driver = new SafariDriver();
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
+        driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
         driver.findElement(By.id(variables.phoneNumberInput)).sendKeys(variables.validMinPhoneNumber);
+        driver.findElement(By.id(variables.agreementCheckbox)).click();
+        driver.findElement(By.cssSelector("input[value = 'Male']")).click();
+    }
 
+    @AfterTest
+    public static void safariQuit() {
+        driver.quit();
+    }
+
+
+    @Test
+    public static void errLimitPhoneNumber() {
         while ((!driver.getPageSource().contains(errMessages.errPhoneNumber))) {
             driver.findElement(By.id(variables.phoneNumberInput)).sendKeys("1");
             i++;
+            if (i > 255 && !driver.getPageSource().contains(errMessages.errPhoneNumber)) {
+
+                System.out.println("Limit is more than 256, no validation error. Terminated.");
+                break;
+            }
         }
+
+    }
+    @Test
+    public static void errMsgLimitPhoneNumber() {
         driver.findElement(By.id(variables.submitBtn)).click();
-        if (driver.getPageSource().contains(errMessages.errPhoneNumber)) {
-            System.out.println("Page still contatins validation error");
-        }
-        System.out.println("Limit of PhoneNumber letters is: " + i);
-        driver.quit();
+        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[4]/text()")).getText(), errMessages.errPhoneNumber);
+        System.out.println("Limit of phoneNumber letters is: " + i);
     }
-    }
+}
 
