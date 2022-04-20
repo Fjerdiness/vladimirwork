@@ -7,6 +7,7 @@ import preConditions.variables;
 
 public class errNotValidInput {
     public static void main(String[] args) {
+
         SafariDriver driver = new SafariDriver();
         System.out.println("\n Start of " + errNotValidInput.class + "\n");
 
