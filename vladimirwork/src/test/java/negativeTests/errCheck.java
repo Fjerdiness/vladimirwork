@@ -14,11 +14,7 @@ public class errCheck {
     static SafariDriver driver;
     @BeforeTest
     public void preConditions() {
-
         driver = new SafariDriver();
-
-        System.out.println("\n Start of " + validSubmitFemale.class + "\n");
-
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
     }
