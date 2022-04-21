@@ -1,6 +1,7 @@
 package negativeTests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -43,10 +44,15 @@ public class errLimitFirstNameMsg {
     }
 
     @Test (dependsOnMethods = "errMaxLimitFirstName")
-    public static void errMsgStillHere() {
-        driver.findElement(By.id(variables.submitBtn)).click();
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[1]/text()")).getText(), errMessages.errFirstName);
-        System.out.println("Limit of FirstName: " + i);
+    public static void errMinLimitFirstName() {
+        while ((driver.getPageSource().contains(errMessages.errFirstName))) {
+            driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
+            i++;
+            if (i == 0 && driver.getPageSource().contains(errMessages.errFirstName)) {
+                System.out.println("0 letters, no validation error. Terminated.");
+                break;
+            }
+        }
     }
 }
 
