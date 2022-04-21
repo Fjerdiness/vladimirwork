@@ -1,4 +1,4 @@
-package errFirstName;
+package FirstName;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.safari.SafariDriver;

@@ -1,4 +1,4 @@
-package errFirstName;
+package FirstName;
 
 
 import org.openqa.selenium.By;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class minFirstNameLimit {
+public class errMinFirstNameLimit {
     static SafariDriver driver;
     static int i = variables.validMinFirstName.length();
     @BeforeTest
