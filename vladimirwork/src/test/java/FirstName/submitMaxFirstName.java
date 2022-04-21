@@ -2,6 +2,7 @@ package FirstName;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class submitMinFirstName {
+public class submitMaxFirstName {
     static SafariDriver driver;
     static String firstName;
     static String _firstName;
@@ -24,7 +25,6 @@ public class submitMinFirstName {
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
-
 
         driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
         driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
@@ -41,11 +41,12 @@ public class submitMinFirstName {
     }
 
     @Test
-    void submitMaxFirstName() {
-        do {
+    void submitMaxFirstName() throws InterruptedException {
+        while (!(driver.getPageSource().contains(errMessages.errFirstName))) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-        } while ((driver.getPageSource().contains(errMessages.errLastName)));
+        }
 
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
         _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 

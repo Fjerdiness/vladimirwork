@@ -13,7 +13,6 @@ import preConditions.variables;
 
 public class errMinFirstNameLimit {
     static SafariDriver driver;
-    static int i = variables.validMinFirstName.length();
     @BeforeTest
     void preConditions() {
         driver = new SafariDriver();

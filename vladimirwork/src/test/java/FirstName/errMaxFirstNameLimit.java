@@ -10,7 +10,6 @@ import preConditions.variables;
 
 public class errMaxFirstNameLimit {
     static SafariDriver driver;
-    static int i = variables.validMinFirstName.length();
     @BeforeTest
     public void preConditions() {
         driver = new SafariDriver();
@@ -26,7 +25,6 @@ public class errMaxFirstNameLimit {
     void errMaxLimitFirstName() {
         while (!(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p/text()")).getText().equals(errMessages.errFirstName))) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-            i++;
             if (driver.findElement(By.xpath("//*[@id=\"root\"]/form/p/text()")).getText().equals(errMessages.errFirstName)) {
                 break;
             }
