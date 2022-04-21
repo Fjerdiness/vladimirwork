@@ -32,7 +32,7 @@ public class errLimitLastNameMsg {
     }
 
     @Test
-    public static void errLimitLastName() {
+    public static void errMaxLimitLastName() {
         while ((!driver.getPageSource().contains(errMessages.errLastName))) {
             driver.findElement(By.id(variables.lastNameInput)).sendKeys("B");
             i++;
@@ -44,12 +44,11 @@ public class errLimitLastNameMsg {
         driver.findElement(By.id(variables.submitBtn)).click();
     }
 
-    @Test
+    @Test (dependsOnMethods = "errMaxLimitLastName")
     public static void errMsgLimitLastName() {
 
         Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[1]/text()")).getText(), errMessages.errLastName);
         System.out.println("Limit of LastName letters is: " + i);
 
-        //TODO no diff between errCheck.java, but not findElementByXpath not working properly.
     }
 }

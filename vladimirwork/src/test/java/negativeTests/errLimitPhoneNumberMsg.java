@@ -34,23 +34,19 @@ public class errLimitPhoneNumberMsg {
 
 
     @Test
-    public static void errLimitPhoneNumber() {
+    public static void errMaxLimitPhoneNumber() {
         while ((!driver.getPageSource().contains(errMessages.errPhoneNumber))) {
             driver.findElement(By.id(variables.phoneNumberInput)).sendKeys("1");
             i++;
             if (i > 255 && !driver.getPageSource().contains(errMessages.errPhoneNumber)) {
-
                 System.out.println("Limit is more than 256, no validation error. Terminated.");
                 break;
             }
         }
-
     }
-    @Test
+    @Test (dependsOnMethods = "errMaxLimitPhoneNumber")
     public static void errMsgLimitPhoneNumber() {
-        driver.findElement(By.id(variables.submitBtn)).click();
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[4]/text()")).getText(), errMessages.errPhoneNumber);
-        System.out.println("Limit of phoneNumber letters is: " + i);
+        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p/text()")).getText(), errMessages.errPhoneNumber);
     }
 }
 

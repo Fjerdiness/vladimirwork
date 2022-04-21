@@ -31,7 +31,7 @@ public class errLimitFirstNameMsg {
     }
 
     @Test
-    public static void errLimitFirstName() {
+    public static void errMaxLimitFirstName() {
         while ((!driver.getPageSource().contains(errMessages.errFirstName))) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys("B");
             i++;
@@ -42,7 +42,7 @@ public class errLimitFirstNameMsg {
         }
     }
 
-    @Test
+    @Test (dependsOnMethods = "errMaxLimitFirstName")
     public static void errMsgStillHere() {
         driver.findElement(By.id(variables.submitBtn)).click();
         Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[1]/text()")).getText(), errMessages.errFirstName);
