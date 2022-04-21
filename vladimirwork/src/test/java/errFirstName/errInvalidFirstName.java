@@ -1,7 +1,6 @@
 package errFirstName;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -11,6 +10,7 @@ import preConditions.errMessages;
 import preConditions.variables;
 
 public class errInvalidFirstName {
+    //TODO little perversion with try...catch block. Need to read more.
     static SafariDriver driver;
     @BeforeTest
     void preConditions() {
@@ -34,9 +34,9 @@ public class errInvalidFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
         Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[1]/text()")).getText(), errMessages.errFirstName);
         driver.findElement(By.id(variables.submitBtn));
-    }
-
-    void isAlertPresent() {
-
+        try {
+            driver.switchTo().alert().accept();
+        } catch (NoAlertPresentException e) {
+        }
     }
 }
