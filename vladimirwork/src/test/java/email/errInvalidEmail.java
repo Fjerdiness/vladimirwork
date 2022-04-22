@@ -1,6 +1,6 @@
-package negativeTests;
+package firstName;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,13 +9,11 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-
-public class errLimitPhoneNumberMsg {
+public class errInvalidFirstName {
+    //TODO little perversion with try...catch block. Need to read more.
     static SafariDriver driver;
-    static int i = 6;
-
-    @BeforeTest
-    public static void preConditions() {
+    @BeforeTest (groups = {"Negative", "FirstName"})
+    void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
@@ -26,27 +24,18 @@ public class errLimitPhoneNumberMsg {
         driver.findElement(By.id(variables.agreementCheckbox)).click();
         driver.findElement(By.cssSelector("input[value = 'Male']")).click();
     }
-
-    @AfterTest
-    public static void safariQuit() {
+    @AfterTest (groups = {"Negative", "FirstName"})
+    void SafariQuit() {
         driver.quit();
     }
 
-
-    @Test
-    public static void errMaxLimitPhoneNumber() {
-        while ((!driver.getPageSource().contains(errMessages.errPhoneNumber))) {
-            driver.findElement(By.id(variables.phoneNumberInput)).sendKeys("1");
-            i++;
-            if (i > 255 && !driver.getPageSource().contains(errMessages.errPhoneNumber)) {
-                System.out.println("Limit is more than 256, no validation error. Terminated.");
-                break;
+    @Test (groups = {"Negative", "FirstName"})
+    void errInvalidFirstName() {
+        while (!driver.getPageSource().contains(errMessages.errLastName)) {
+            driver.findElement(By.id(variables.lastNameInput)).sendKeys(Keys.BACK_SPACE);
+            if (driver.getPageSource().contains(errMessages.errLastName)) {
+                Assert.assertTrue(driver.getPageSource().contains(errMessages.errLastName));
             }
         }
     }
-    @Test (dependsOnMethods = "errMaxLimitPhoneNumber")
-    public static void errMsgLimitPhoneNumber() {
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p/text()")).getText(), errMessages.errPhoneNumber);
-    }
 }
-
