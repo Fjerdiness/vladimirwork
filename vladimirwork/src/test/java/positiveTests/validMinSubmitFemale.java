@@ -9,9 +9,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import preConditions.variables;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static preConditions.variables.*;
 
 public class validSubmitFemale {
@@ -53,11 +50,6 @@ public class validSubmitFemale {
     @AfterTest
     public static void safariQuit() {
         driver.quit();
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
     @Test
     public static void a_FirstNameTest() {

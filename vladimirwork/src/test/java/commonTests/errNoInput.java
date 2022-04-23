@@ -1,4 +1,4 @@
-package negativeTests;
+package commonTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;

@@ -7,11 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import preConditions.variables;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.awt.SystemColor.text;
-
 public class validSubmitMale extends variables {
 
     //This looks nicer, now I tried to google as much as I can :)
