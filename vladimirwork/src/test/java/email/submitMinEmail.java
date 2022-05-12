@@ -1,4 +1,4 @@
-package firstName;
+package email;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -10,17 +10,17 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class submitMinFirstName {
+public class submitMinEmail {
     static SafariDriver driver;
     static String firstName;
-    static String _firstName;
+    static String _email;
     static String lastName;
     static String phoneNumber;
     static String email;
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    @BeforeTest (groups = {"Positive", "Email"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -35,25 +35,22 @@ public class submitMinFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
     }
 
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Positive", "Email"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test (groups = {"Negative", "FirstName"})
-    void submitMaxFirstName() {
-        do {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-        } while ((driver.getPageSource().contains(errMessages.errFirstName)));
+    @Test (groups = {"Positive", "Email"})
+    void submitMinEmail() {
 
-        _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
+        _email = driver.findElement(By.id(variables.emailInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 
         String log = driver.switchTo().alert().getText();
         JSONObject jsonobject = new JSONObject(log);
 
-        firstName = jsonobject.getString("firstName");
-        lastName = jsonobject.getString("lastName");
+        firstName = jsonobject.getString("FirstName");
+        lastName = jsonobject.getString("LastName");
         email = jsonobject.getString("Email");
         phoneNumber = jsonobject.getString("PhoneNumber");
         gender = jsonobject.getString("Gender");
@@ -61,7 +58,7 @@ public class submitMinFirstName {
 
         driver.switchTo().alert().dismiss();
 
-        Assert.assertEquals(_firstName,firstName);
+        Assert.assertEquals(_email,email);
 
     }
 }

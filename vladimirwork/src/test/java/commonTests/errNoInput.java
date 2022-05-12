@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class errCheck {
+public class errNoInput {
     static SafariDriver driver;
     @BeforeTest
     public void preConditions() {
@@ -45,8 +45,7 @@ public class errCheck {
     }
     @Test
     public static void errMsgAgreement() {
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[6]/text()")).getText(), errMessages.errPersData);
+        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[6]/text()")).getText(), errMessages.errAgreement);
     }
-
 }
 

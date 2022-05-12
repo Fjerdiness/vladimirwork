@@ -1,4 +1,4 @@
-package FirstName;
+package firstName;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -20,7 +20,7 @@ public class submitMinFirstName {
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest
+    @BeforeTest (groups = {"Positive", "FirstName"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -35,17 +35,13 @@ public class submitMinFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
     }
 
-    @AfterTest
+    @AfterTest (groups = {"Positive", "FirstName"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test
+    @Test (groups = {"Positive", "FirstName"})
     void submitMaxFirstName() {
-        do {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-        } while ((driver.getPageSource().contains(errMessages.errLastName)));
-
         _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 

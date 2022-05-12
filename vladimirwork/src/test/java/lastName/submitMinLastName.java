@@ -1,4 +1,4 @@
-package FirstName;
+package lastName;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -10,17 +10,17 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class submitMinFirstName {
+public class submitMinLastName {
     static SafariDriver driver;
     static String firstName;
-    static String _firstName;
+    static String _lastName;
     static String lastName;
     static String phoneNumber;
     static String email;
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    @BeforeTest (groups = {"Positive", "LastName"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -35,18 +35,14 @@ public class submitMinFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
     }
 
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Positive", "LastName"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test (groups = {"Negative", "FirstName"})
-    void submitMaxFirstName() {
-        do {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-        } while ((driver.getPageSource().contains(errMessages.errLastName)));
-
-        _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
+    @Test (groups = {"Positive", "LastName"})
+    void submitMaxLastName() {
+        _lastName = driver.findElement(By.id(variables.lastNameInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 
         String log = driver.switchTo().alert().getText();
@@ -61,7 +57,7 @@ public class submitMinFirstName {
 
         driver.switchTo().alert().dismiss();
 
-        Assert.assertEquals(_firstName,firstName);
+        Assert.assertEquals(_lastName,lastName);
 
     }
 }

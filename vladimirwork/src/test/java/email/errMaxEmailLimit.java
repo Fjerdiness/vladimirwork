@@ -1,4 +1,4 @@
-package firstName;
+package email;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
@@ -9,25 +9,28 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class errMaxFirstNameLimit {
+public class errMaxEmailLimit {
     static SafariDriver driver;
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    static int _emailInput;
+    @BeforeTest (groups = {"Negative", "Email"})
     public void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
     }
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Negative", "Email"})
     public void SafariQuit() {
         driver.quit();
     }
-    @Test (groups = {"Negative", "FirstName"})
-    void errMaxFirstNameLimit() {
-        while (!driver.getPageSource().contains(errMessages.errFirstName)) {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
-            if (driver.getPageSource().contains(errMessages.errFirstName)) {
-                Assert.assertTrue(driver.getPageSource().contains(errMessages.errFirstName));
+    @Test (groups = {"Negative", "Email"})
+    void errMaxEmailLimit() {
+        while (!driver.getPageSource().contains(errMessages.errEmail)) {
+            driver.findElement(By.id(variables.emailInput)).sendKeys("T");
+            _emailInput = driver.findElement(By.id(variables.emailInput)).getAttribute("value").length();
+            Assert.assertFalse(driver.getPageSource().contains(errMessages.errEmail));
+            if (_emailInput > 25) {
+                break;
             }
         }
     }

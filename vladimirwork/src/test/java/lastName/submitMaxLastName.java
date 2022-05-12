@@ -1,4 +1,4 @@
-package FirstName;
+package lastName;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -11,17 +11,17 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class submitMaxFirstName {
+public class submitMaxLastName {
     static SafariDriver driver;
     static String firstName;
-    static String _firstName;
+    static String _lastName;
     static String lastName;
     static String phoneNumber;
     static String email;
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    @BeforeTest (groups = {"Positive", "LastName"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -35,19 +35,19 @@ public class submitMaxFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
     }
 
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Positive", "LastName"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test (groups = {"Negative", "FirstName"})
-    void submitMaxFirstName() throws InterruptedException {
-        while (!(driver.getPageSource().contains(errMessages.errFirstName))) {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
+    @Test (groups = {"Positive", "LastName"})
+    void submitMaxLastName() {
+        while (!(driver.getPageSource().contains(errMessages.errLastName))) {
+            driver.findElement(By.id(variables.lastNameInput)).sendKeys("T");
         }
 
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
-        _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
+        driver.findElement(By.id(variables.lastNameInput)).sendKeys(Keys.BACK_SPACE);
+        _lastName = driver.findElement(By.id(variables.lastNameInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 
         String log = driver.switchTo().alert().getText();
@@ -62,7 +62,7 @@ public class submitMaxFirstName {
 
         driver.switchTo().alert().dismiss();
 
-        Assert.assertEquals(_firstName,firstName);
+        Assert.assertEquals(_lastName,lastName);
 
     }
 }

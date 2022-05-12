@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class errLestThanMin {
+public class errLessThanMin {
     static SafariDriver driver;
     static int i = 1;
     @BeforeTest
@@ -24,7 +24,7 @@ public class errLestThanMin {
         driver.findElement(By.id(variables.phoneNumberInput)).sendKeys(variables.validMinPhoneNumber);
     }
     @BeforeTest (dependsOnMethods = "preConditions")
-    void firstNameMoreThanMax() {
+    void firstLessThanMin() {
         i = 0;
         while (!driver.getPageSource().contains(errMessages.errFirstName)) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
@@ -35,7 +35,7 @@ public class errLestThanMin {
         }
     }
     @BeforeTest (dependsOnMethods = "preConditions")
-    void lastNameMoreThanMax() {
+    void lastNameLessThanMin() {
         i = 0;
         while (!driver.getPageSource().contains(errMessages.errLastName)) {
             driver.findElement(By.id(variables.lastNameInput)).sendKeys(Keys.BACK_SPACE);
@@ -46,7 +46,7 @@ public class errLestThanMin {
         }
     }
     @BeforeTest (dependsOnMethods = "preConditions")
-    void emailMoreThanMax() {
+    void emailLessThanMin() {
         i = 0;
         while (!driver.getPageSource().contains(errMessages.errEmail)) {
             driver.findElement(By.id(variables.emailInput)).sendKeys(Keys.BACK_SPACE);
@@ -57,7 +57,7 @@ public class errLestThanMin {
         }
     }
     @BeforeTest (dependsOnMethods = "preConditions")
-    void phoneNumberMoreThanMax() {
+    void phoneNumberLessThanMin() {
         i = 0;
         while (!driver.getPageSource().contains(errMessages.errPhoneNumber)) {
             i++;

@@ -1,4 +1,4 @@
-package firstName;
+package email;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -11,50 +11,54 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class submitMaxFirstName {
+public class submitMaxEmail {
     static SafariDriver driver;
     static String firstName;
-    static String _firstName;
+    static String _email;
     static String lastName;
     static String phoneNumber;
     static String email;
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    @BeforeTest (groups = {"Positive", "Email"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
 
+        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
         driver.findElement(By.id(variables.lastNameInput)).sendKeys(variables.validMinLastName);
-        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
         driver.findElement(By.id(variables.phoneNumberInput)).sendKeys(variables.validMinPhoneNumber);
         driver.findElement(By.xpath("//*[@id=\"root\"]/form/div[1]/input")).click();
         driver.findElement(By.id(variables.agreementCheckbox)).click();
         driver.findElement(By.id(variables.submitBtn)).click();
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
+
     }
 
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Positive", "Email"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test (groups = {"Negative", "FirstName"})
-    void submitMaxFirstName() {
-        while (!(driver.getPageSource().contains(errMessages.errFirstName))) {
-            driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
+    @Test (groups = {"Positive", "Email"})
+    void submitMaxEmail() {
+        while (!(driver.getPageSource().contains(errMessages.errEmail))) {
+            driver.findElement(By.id(variables.emailInput)).sendKeys("T");
+            if (driver.findElement(By.id(variables.emailInput)).getAttribute("value").length() > 25) {
+                break;
+            }
         }
 
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
-        _firstName = driver.findElement(By.id(variables.firstNameInput)).getAttribute("value");
+        driver.findElement(By.id(variables.emailInput)).sendKeys(Keys.BACK_SPACE);
+        _email = driver.findElement(By.id(variables.emailInput)).getAttribute("value");
         driver.findElement(By.id(variables.submitBtn)).click();
 
         String log = driver.switchTo().alert().getText();
         JSONObject jsonobject = new JSONObject(log);
 
-        firstName = jsonobject.getString("firstName");
-        lastName = jsonobject.getString("lastName");
+        firstName = jsonobject.getString("FirstName");
+        lastName = jsonobject.getString("LastName");
         email = jsonobject.getString("Email");
         phoneNumber = jsonobject.getString("PhoneNumber");
         gender = jsonobject.getString("Gender");
@@ -62,7 +66,7 @@ public class submitMaxFirstName {
 
         driver.switchTo().alert().dismiss();
 
-        Assert.assertEquals(_firstName,firstName);
+        Assert.assertEquals(_email,email);
 
     }
 }

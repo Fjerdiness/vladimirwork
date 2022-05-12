@@ -9,12 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import preConditions.variables;
 
-import static preConditions.variables.*;
-
-public class validSubmitFemale {
-
-        //Also, updated after initial sending. Just selflearaning.
-
+public class validMinSubmitFemale {
     static SafariDriver driver;
     static String firstName;
     static String lastName;
@@ -52,28 +47,28 @@ public class validSubmitFemale {
         driver.quit();
     }
     @Test
-    public static void a_FirstNameTest() {
-        Assert.assertEquals(firstName, validMinFirstName);
+    public static void FirstNameTest() {
+        Assert.assertEquals(firstName, variables.validMinFirstName);
     }
 
     @Test
-    public static void b_LastNameTest() {
-        Assert.assertEquals(lastName, validMinLastName);
+    public static void LastNameTest() {
+        Assert.assertEquals(lastName, variables.validMinLastName);
     }
     @Test
-    public static void c_EmailTest() {
-        Assert.assertEquals(email, validMinEmail);
+    public static void EmailTest() {
+        Assert.assertEquals(email, variables.validMinEmail);
     }
     @Test
-    public static void d_PhoneNumberTest() {
-        Assert.assertEquals(phoneNumber, validMinPhoneNumber);
+    public static void PhoneNumberTest() {
+        Assert.assertEquals(phoneNumber, variables.validMinPhoneNumber);
     }
     @Test
-    public static void e_GenderTest() {
-        Assert.assertEquals(gender, female);
+    public static void GenderTest() {
+        Assert.assertEquals(gender, variables.female);
     }
     @Test
-    public static void f_AgreementTest() {
-        Assert.assertEquals(boolAgreement, boolAgreementTrue);
+    public static void AgreementTest() {
+        Assert.assertEquals(boolAgreement, variables.boolAgreementTrue);
     }
 }

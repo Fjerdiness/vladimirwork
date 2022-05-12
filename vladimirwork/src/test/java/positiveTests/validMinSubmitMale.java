@@ -4,13 +4,12 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import preConditions.variables;
 
-public class validSubmitMale extends variables {
-
-    //This looks nicer, now I tried to google as much as I can :)
-
+public class validMinSubmitMale {
     static SafariDriver driver;
     static String firstName;
     static String lastName;
@@ -19,7 +18,7 @@ public class validSubmitMale extends variables {
     static String gender;
     static String boolAgreement;
     @BeforeTest
-    public void submitFemale() {
+    public void submitMale() {
         driver = new SafariDriver();
         driver.get(variables.URL);
 
@@ -50,29 +49,29 @@ public class validSubmitMale extends variables {
         driver.quit();
     }
     @Test
-    public static void a_FirstNameTest() {
-        Assert.assertEquals(firstName, validMinFirstName);
+    public static void FirstNameTest() {
+        Assert.assertEquals(firstName, variables.validMinFirstName);
     }
 
     @Test
-    public static void b_LastNameTest() {
-        Assert.assertEquals(lastName, validMinLastName);
+    public static void LastNameTest() {
+        Assert.assertEquals(lastName, variables.validMinLastName);
     }
     @Test
-    public static void c_EmailTest() {
-        Assert.assertEquals(email, validMinEmail);
+    public static void EmailTest() {
+        Assert.assertEquals(email, variables.validMinEmail);
     }
     @Test
-    public static void d_PhoneNumberTest() {
-        Assert.assertEquals(phoneNumber, validMinPhoneNumber);
+    public static void PhoneNumberTest() {
+        Assert.assertEquals(phoneNumber, variables.validMinPhoneNumber);
     }
     @Test
-    public static void e_GenderTest() {
-        Assert.assertEquals(gender, male);
+    public static void GenderTest() {
+        Assert.assertEquals(gender, variables.male);
     }
     @Test
-    public static void f_AgreementTest() {
-        Assert.assertEquals(boolAgreement, boolAgreementTrue);
+    public static void AgreementTest() {
+        Assert.assertEquals(boolAgreement, variables.boolAgreementTrue);
     }
 }
 

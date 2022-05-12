@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name = "firstNameTests" >
+    <test name = "firstName" >
+        <groups>
+            <run>
+                <include name = "firstName" />
+            </run>
+        </groups>
+        <classes>
+            <class name="firstName.errInvalidFirstName"/>
+            <class name="firstName.errMaxFirstNameLimit"/>
+            <class name="firstName.errMinFirstNameLimit"/>
+            <class name="firstName.submitMaxFirstName"/>
+            <class name="firstName.submitMinFirstName"/>
+        </classes>
+    </test>
+    <test name = "lastName">
+        <groups>
+            <run>
+                <include name = "lastName">
+                </include>
+            </run>
+        </groups>
+        <classes>
+            <class name="lastName.errInvalidLastName"/>
+            <class name="lastName.errMaxLastNameLimit"/>
+            <class name="lastName.errMinLastNameLimit"/>
+            <class name="lastName.submitMaxLastName"/>
+            <class name="lastName.errMaxLastNameLimit"/>
+        </classes>
+    </test>
+</suite>
+

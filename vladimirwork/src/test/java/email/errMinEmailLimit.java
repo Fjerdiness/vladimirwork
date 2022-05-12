@@ -1,4 +1,4 @@
-package firstName;
+package email;
 
 
 import org.openqa.selenium.By;
@@ -11,22 +11,27 @@ import org.testng.annotations.Test;
 import preConditions.errMessages;
 import preConditions.variables;
 
-public class errMinFirstNameLimit {
+public class errMinEmailLimit {
     static SafariDriver driver;
-    @BeforeTest (groups = {"Negative", "FirstName"})
+    static int _emailInput;
+    @BeforeTest (groups = {"Negative", "Email"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
         driver.findElement(By.id(variables.submitBtn)).click();
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
-        driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.id(variables.emailInput)).sendKeys(variables.validMinEmail);
     }
-    @AfterTest (groups = {"Negative", "FirstName"})
+    @AfterTest (groups = {"Negative", "Email"})
     void SafariQuit() {
         driver.quit();
     }
-    @Test (groups = {"Negative", "FirstName"})
-    public void errMinLimitFirstName() {
-        Assert.assertTrue(driver.getPageSource().contains(errMessages.errLastName));
+    @Test (groups = {"Negative", "Email"})
+    public void errMinEmailLimit() {
+        while (!driver.getPageSource().contains(errMessages.errEmail)) {
+            driver.findElement(By.id(variables.emailInput)).sendKeys(Keys.BACK_SPACE);
+            if (driver.getPageSource().contains(errMessages.errEmail)) {
+                Assert.assertTrue(driver.getPageSource().contains(errMessages.errEmail));
+            }
+        }
     }
 }

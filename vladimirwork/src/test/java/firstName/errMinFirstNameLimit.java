@@ -1,4 +1,4 @@
-package FirstName;
+package firstName;
 
 
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import preConditions.variables;
 
 public class errMinFirstNameLimit {
     static SafariDriver driver;
-    @BeforeTest
+    @BeforeTest (groups = {"Negative", "FirstName"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -21,12 +21,12 @@ public class errMinFirstNameLimit {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(Keys.BACK_SPACE);
     }
-    @AfterTest
+    @AfterTest (groups = {"Negative", "FirstName"})
     void SafariQuit() {
         driver.quit();
     }
-    @Test
+    @Test (groups = {"Negative", "FirstName"})
     public void errMinLimitFirstName() {
-        Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"root\"]/form/p[1]/text()")).getText(), errMessages.errFirstName);
+        Assert.assertTrue(driver.getPageSource().contains(errMessages.errLastName));
     }
 }

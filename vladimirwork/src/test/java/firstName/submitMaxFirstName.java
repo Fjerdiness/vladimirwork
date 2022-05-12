@@ -1,4 +1,4 @@
-package FirstName;
+package firstName;
 
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -21,7 +21,7 @@ public class submitMaxFirstName {
     static String gender;
     static String boolAgreement;
 
-    @BeforeTest
+    @BeforeTest (groups = {"Positive", "FirstName"})
     void preConditions() {
         driver = new SafariDriver();
         driver.get(variables.URL);
@@ -35,13 +35,13 @@ public class submitMaxFirstName {
         driver.findElement(By.id(variables.firstNameInput)).sendKeys(variables.validMinFirstName);
     }
 
-    @AfterTest
+    @AfterTest (groups = {"Positive", "FirstName"})
     public static void safariQuit() {
         driver.quit();
     }
 
-    @Test
-    void submitMaxFirstName() throws InterruptedException {
+    @Test (groups = {"Positive", "FirstName"})
+    void submitMaxFirstName() {
         while (!(driver.getPageSource().contains(errMessages.errFirstName))) {
             driver.findElement(By.id(variables.firstNameInput)).sendKeys("T");
         }
